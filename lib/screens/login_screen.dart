@@ -7,6 +7,7 @@ import 'package:http/http.dart' as http;
 import 'package:vehicles_app/helpers/constans.dart';
 import 'package:vehicles_app/models/token.dart';
 import 'package:vehicles_app/components/loader_component.dart';
+import 'package:vehicles_app/screens/home_screen.dart';
 
 
 class LoginScreen extends StatefulWidget {
@@ -17,11 +18,11 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  String _email = '';
+  String _email = 'luis@yopmail.com';
   String _emailError = '';
   bool _emailShowError = false;
 
-  String _password = '';
+  String _password = '123456';
   String _passwordError = '';
   bool _passwordShowError = false;
 
@@ -205,7 +206,12 @@ class _LoginScreenState extends State<LoginScreen> {
     var body = response.body;
     var decodedJson = jsonDecode(body);
     var token = Token.fromJson(decodedJson);
-    print(token.token);
+    Navigator.pushReplacement(
+      context, 
+      MaterialPageRoute(
+        builder: (context) => HomeScreen(token: token,)
+      )
+    );
   }
 
   bool _validateFields() {
