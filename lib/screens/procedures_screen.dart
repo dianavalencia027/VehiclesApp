@@ -23,7 +23,6 @@ class ProceduresScreen extends StatefulWidget {
 class _ProceduresScreenState extends State<ProceduresScreen> {
   List<Procedure> _procedures = [];
   bool _showLoader = false;
-  bool _isFiltered = false;
 
    @override
   void initState() {
