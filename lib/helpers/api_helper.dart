@@ -6,6 +6,7 @@ import 'package:vehicles_app/models/response.dart';
 import 'package:vehicles_app/models/token.dart';
 import 'package:vehicles_app/models/brand.dart';
 import 'constans.dart';
+import 'package:vehicles_app/models/document_type.dart';
 
 
 class ApiHelper {
@@ -119,5 +120,32 @@ class ApiHelper {
     return Response(isSuccess: true, result: list);
   }
 
-  
+  static Future<Response> getDocumentTypes(Token token) async {
+    var url = Uri.parse('${Constans.apiUrl}/api/DocumentTypes');
+    var response = await http.get(
+      url,
+      headers: {
+        'content-type' : 'application/json',
+        'accept' : 'application/json',
+        'authorization': 'bearer ${token.token}',
+      },
+    );
+
+    var body = response.body;
+    if (response.statusCode >= 400) {
+      return Response(isSuccess: false, message: body);
+    }
+
+    List<DocumentType> list = [];    
+    var decodedJson = jsonDecode(body);
+    if (decodedJson != null) {
+      for (var item in decodedJson) {
+        list.add(DocumentType.fromJson(item));
+      }
+    }
+
+    return Response(isSuccess: true, result: list);
+  }
+
+
 }
