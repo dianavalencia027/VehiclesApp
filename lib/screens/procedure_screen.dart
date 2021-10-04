@@ -223,7 +223,7 @@ class _ProcedureScreenState extends State<ProcedureScreen> {
       return;
     }
 
-    Navigator.pop(context);
+    Navigator.pop(context, 'yes');
   }
 
   _saveRecord() async {
@@ -259,7 +259,7 @@ class _ProcedureScreenState extends State<ProcedureScreen> {
       );    
       return;
     }
-    Navigator.pop(context);
+    Navigator.pop(context, 'yes');
   }
 
   void _confirmDelete() async{
@@ -305,7 +305,7 @@ class _ProcedureScreenState extends State<ProcedureScreen> {
       return;
     }
 
-    Navigator.pop(context);
+    Navigator.pop(context, 'yes');
   }
 
   
