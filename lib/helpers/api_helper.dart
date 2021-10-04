@@ -1,9 +1,10 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
-
 import 'package:vehicles_app/models/procedure.dart';
 import 'package:vehicles_app/models/response.dart';
+import 'package:vehicles_app/models/token.dart';
+import 'package:vehicles_app/models/brand.dart';
 import 'constans.dart';
 
 
@@ -35,7 +36,7 @@ class ApiHelper {
     return Response(isSuccess: true, result: list);
   }
 
-   static Future<Response> put(String controller, String id, Map<String, dynamic> request, String token) async {
+  static Future<Response> put(String controller, String id, Map<String, dynamic> request, String token) async {
     var url = Uri.parse('${Constans.apiUrl}$controller$id');
     var response = await http.put(
       url,
@@ -89,6 +90,33 @@ class ApiHelper {
     }
 
     return Response(isSuccess: true);
+  }
+
+  static Future<Response> getBrands(Token token) async {
+    var url = Uri.parse('${Constans.apiUrl}/api/Brands');
+    var response = await http.get(
+      url,
+      headers: {
+        'content-type' : 'application/json',
+        'accept' : 'application/json',
+        'authorization': 'bearer ${token.token}',
+      },
+    );
+
+    var body = response.body;
+    if (response.statusCode >= 400) {
+      return Response(isSuccess: false, message: body);
+    }
+
+    List<Brand> list = [];    
+    var decodedJson = jsonDecode(body);
+    if (decodedJson != null) {
+      for (var item in decodedJson) {
+        list.add(Brand.fromJson(item));
+      }
+    }
+
+    return Response(isSuccess: true, result: list);
   }
 
   
