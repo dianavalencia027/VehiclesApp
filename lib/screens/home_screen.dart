@@ -6,6 +6,7 @@ import 'package:vehicles_app/screens/brands_screen.dart';
 import 'package:vehicles_app/screens/document_types_screen.dart';
 import 'package:vehicles_app/screens/login_screen.dart';
 import 'package:vehicles_app/screens/procedures_screen.dart';
+import 'package:vehicles_app/screens/users_screen.dart';
 import 'package:vehicles_app/screens/vehicle_types_screen.dart';
 
 
@@ -124,7 +125,14 @@ class _HomeScreenState extends State<HomeScreen> {
           ListTile(
             leading: Icon(Icons.people),
             title: const Text('Usuarios'),
-            onTap: () {}
+            onTap: () {
+              Navigator.push(
+                context, 
+                MaterialPageRoute(
+                  builder: (context) => UsersScreen(token: widget.token,)
+                )
+              );
+            }
           ),
           Divider(
             color: Colors.black, 

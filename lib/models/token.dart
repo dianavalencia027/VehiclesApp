@@ -14,6 +14,8 @@ class Token {
     imageFullPath: '', 
     userType: 0, 
     fullName: '', 
+    vehicles: [], 
+    vehiclesCount: 0,
     id: '', 
     userName: '', 
     email: '', 
@@ -33,7 +35,6 @@ class Token {
     data['token'] = this.token;
     data['expiration'] = this.expiration;
     data['user'] = this.user.toJson();
-
     return data;
   }
 }

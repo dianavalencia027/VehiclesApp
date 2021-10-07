@@ -1,12 +1,13 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+
+
 import 'package:vehicles_app/models/document_type.dart';
-
-
 import 'package:vehicles_app/models/procedure.dart';
 import 'package:vehicles_app/models/response.dart';
 import 'package:vehicles_app/models/token.dart';
 import 'package:vehicles_app/models/brand.dart';
+import 'package:vehicles_app/models/user.dart';
 import 'package:vehicles_app/models/vehicle_type.dart';
 import 'constans.dart';
 
@@ -176,5 +177,33 @@ class ApiHelper {
     return Response(isSuccess: true, result: list);
   }
 
-  
+  static Future<Response> getUsers(String token) async {
+    var url = Uri.parse('${Constans.apiUrl}/api/Users');
+    var response = await http.get(
+      url,
+      headers: {
+        'content-type' : 'application/json',
+        'accept' : 'application/json',
+        'authorization': 'bearer $token',
+      },
+    );
+
+    var body = response.body;
+    if (response.statusCode >= 400) {
+      return Response(isSuccess: false, message: body);
+    }
+
+    List<User> list = [];    
+    var decodedJson = jsonDecode(body);
+    if (decodedJson != null) {
+      for (var item in decodedJson) {
+        list.add(User.fromJson(item));
+      }
+    }
+
+    return Response(isSuccess: true, result: list);
+  }
+
+
 }
+
