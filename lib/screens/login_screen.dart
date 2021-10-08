@@ -36,16 +36,19 @@ class _LoginScreenState extends State<LoginScreen> {
     return Scaffold(
       body: Stack(
         children: <Widget>[
-          Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              _showlogo(),
-              SizedBox(height: 20,),
-              _showEmail(),
-              _showPassword(),
-              _showRememberme(),
-              _showButtons(),
-            ],  
+          SingleChildScrollView(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                SizedBox(height: 40,),
+                _showLogo(),
+                SizedBox(height: 20,),
+                _showEmail(),
+                _showPassword(),
+                _showRememberme(),
+                _showButtons(),
+              ],
+            ),
           ),
           _showLoader ? LoaderComponent(text: 'Por favor espere...') : Container(),
         ],
@@ -53,7 +56,7 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  Widget _showlogo() {
+  Widget _showLogo() {
     return Image(
       image: AssetImage('assets/vehicles_logo.png'),
       width: 300,
