@@ -58,7 +58,7 @@ class _TakePictureScreenState extends State<TakePictureScreen> {
             final image = await _controller.takePicture();
             Response? response = await Navigator.of(context).push(
               MaterialPageRoute(
-                builder: (context) => DisplayPictureScreen(imagePath: image.path)
+                builder: (context) => DisplayPictureScreen(image: image,)
               )
             );
             if (response != null) {
